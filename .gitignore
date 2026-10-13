@@ -1,0 +1,13 @@
+﻿target/
+build/
+bin/
+*.class
+.settings/
+.project
+.classpath
+.idea/
+.vscode/
+*.log
+.env
+.env.*
+!.env.example

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           classpath:org/springframework/beans/factory/xml/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           classpath:org/springframework/web/servlet/config/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           classpath:org/springframework/context/config/spring-context.xsd">
+
+	<!-- Enable @Controller, @Service, @Repository annotations -->
+	<context:component-scan base-package="com.nt" />
+	<mvc:annotation-driven />
+	
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+	
+	<mvc:resources mapping="/images/**" location="/assets/images/" />
+	<!-- Enable Spring MVC annotations -->
+	<!-- <mvc:annotation-driven/> -->
+
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**"/> <bean 
+		class="com.rt.cntrl.LoggingInterceptor"/> </mvc:interceptor> </mvc:interceptors> -->
+
+	<!-- DataSource Bean -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/dairy_farm?useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="pradip" />
+	</bean>
+
+	<!-- JdbcTemplate Bean -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- View Resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+</beans>
